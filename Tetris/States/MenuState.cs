@@ -26,8 +26,8 @@ namespace Tetris.States
       var buttonStart = new Vector2(Game1.CentreX - (buttonTexture.Width / 2), 300);
 
       _buttons.Add(new Button(buttonTexture, buttonStart, "Start") { OnClick = () => _game.ChangeState(new PlayingState(_game)) });
-      _buttons.Add(new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 1), "High Scores", 0.5f) { OnClick = () => _game.ChangeState(new HighScoresState(_game)) });
-      _buttons.Add(new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 2), "Settings", 0.65f) { OnClick = () => _game.ChangeState(new SettingsState(_game)) });
+      _buttons.Add(new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 1), "High Scores") { OnClick = () => _game.ChangeState(new HighScoresState(_game)) });
+      _buttons.Add(new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 2), "Settings") { OnClick = () => _game.ChangeState(new SettingsState(_game)) });
       _buttons.Add(new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 3), "Quit") { OnClick = () => _game.Exit() });
     }
 

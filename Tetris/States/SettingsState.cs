@@ -30,9 +30,9 @@ namespace Tetris.States
 
       var buttonStart = new Vector2(Game1.CentreX - (buttonTexture.Width / 2), 300);
 
-      _buttons.Add("Screen", new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 0), GetFullScreenTitle(), 0.5f) { OnClick = OnScreenClicked });
-      _buttons.Add("Music", new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 1), GetMusicTitle(), 0.5f) { OnClick = OnMusicClicked });
-      _buttons.Add("FX", new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 2), GetFXTitle(), 0.5f) { OnClick = OnFxClicked });
+      _buttons.Add("Screen", new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 0), GetFullScreenTitle()) { OnClick = OnScreenClicked });
+      _buttons.Add("Music", new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 1), GetMusicTitle()) { OnClick = OnMusicClicked });
+      _buttons.Add("FX", new Button(buttonTexture, buttonStart + new Vector2(0, (buttonTexture.Height + 10) * 2), GetFXTitle()) { OnClick = OnFxClicked });
 
       var lastButtonStart = new Vector2(Game1.CentreX - (buttonTexture.Width / 2), 540);
       _buttons.Add("Apply", new Button(buttonTexture, new Vector2(lastButtonStart.X, lastButtonStart.Y), "Apply") { OnClick = () => _game.SaveSettings(_settings) });

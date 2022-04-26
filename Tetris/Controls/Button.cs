@@ -23,17 +23,19 @@ namespace Tetris.Controls
 
     public Action OnClick;
 
-    public Button(Texture2D texture, Vector2 position, string text, float textScale = 1f)
+    public Button(Texture2D texture, Vector2 position, string text)
     {
       _texture = texture;
       _position = position;
 
-      _label = new Label(text, new Rectangle((int)position.X, (int)position.Y, _texture.Width, _texture.Height), textScale);
+      var padding = 10;
+
+      _label = new Label(text, new Rectangle((int)_position.X + padding, (int)_position.Y + padding, _texture.Width - (padding * 2), _texture.Height - (padding * 2)));
     }
 
-    public void SetText(string newText, float? scale = null, Label.HorizonalAlignments? newAlignment = null, Label.VerticalAlignments? newVAlignment = null)
+    public void SetText(string newText, Label.HorizonalAlignments? newAlignment = null, Label.VerticalAlignments? newVAlignment = null)
     {
-      _label.SetText(newText, scale, newAlignment, newVAlignment);
+      _label.SetText(newText, newAlignment, newVAlignment);
     }
 
     public void Update(GameTime gameTime)

@@ -17,8 +17,6 @@ namespace Tetris.States
 
     private HighScore _score;
 
-    private ContentManager _content;
-
     private Button _continueButton;
 
     private Label _nameLabel;
@@ -37,11 +35,9 @@ namespace Tetris.States
 
     public override void LoadContent(ContentManager content)
     {
-      _content = content;
-
       var buttonTexture = content.Load<Texture2D>("Button");
 
-      _continueButton = new Button(buttonTexture, new Vector2(Game1.CentreX - (buttonTexture.Width / 2), 600), "Continue", 0.6f)
+      _continueButton = new Button(buttonTexture, new Vector2(Game1.CentreX - (buttonTexture.Width / 2), 600), "Continue")
       {
         OnClick = Continue
       };

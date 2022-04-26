@@ -32,7 +32,7 @@ namespace Tetris.States
       _titleLabel = new Label("High Scores", new Rectangle(Game1.CentreX - (width / 2), 180, width, 30));
 
       _labels = _game.HighScoreManager.GetTopHighScores(10).Select((score, i) =>
-        new Label($"#{(i + 1):00}:{score.Name}-{score.Value}", new Rectangle(Game1.CentreX - (width / 2), (_titleLabel.Box.Bottom + 30) + (34 * i), 216, 30), 1f, Label.HorizonalAlignments.Left)
+        new Label($"#{(i + 1):00}:{score.Name}-{score.Value}", new Rectangle(Game1.CentreX - (width / 2), (_titleLabel.Box.Bottom + 30) + (34 * i), 216, 30), Label.HorizonalAlignments.Left)
       ).ToList();
 
       var buttonTexture = content.Load<Texture2D>("Button");

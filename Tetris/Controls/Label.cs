@@ -34,23 +34,20 @@ namespace Tetris.Controls
 
     private List<Sprite> _sprites = new List<Sprite>();
 
-    public Label(string text, Rectangle box, float scale = 1f, HorizonalAlignments alignment = HorizonalAlignments.Center, VerticalAlignments vAlignment = VerticalAlignments.Middle)
+    public Label(string text, Rectangle box, HorizonalAlignments alignment = HorizonalAlignments.Center, VerticalAlignments vAlignment = VerticalAlignments.Middle)
     {
       Box = box;
-      _scale = scale;
+      _scale = 1f;
       _hAlignment = alignment;
       _vAlignment = vAlignment;
 
-      SetText(text, _scale, _hAlignment, _vAlignment);
+      SetText(text, _hAlignment, _vAlignment);
     }
 
-    public void SetText(string newText, float? scale = null, HorizonalAlignments? newAlignment = null, VerticalAlignments? newVAlignment = null)
+    public void SetText(string newText, HorizonalAlignments? newAlignment = null, VerticalAlignments? newVAlignment = null)
     {
       if (_text == newText)
         return;
-
-      if (scale != null)
-        _scale = scale.Value;
 
       _sprites = new List<Sprite>();
 
@@ -62,11 +59,27 @@ namespace Tetris.Controls
       if (newVAlignment != null)
         _vAlignment = newVAlignment.Value;
 
-      var position = Vector2.Zero;
-      var charWidth = Game1.Characters.FirstOrDefault().Value.Width * _scale; // The width should be the same for everything
-      var charHeight = Game1.Characters.FirstOrDefault().Value.Height * _scale;
-      var spaceBetween = (4f * _scale);
-      var incrementAmount = charWidth + spaceBetween;
+
+      float charWidth;
+      float charHeight;
+      float incrementAmount;
+      float width;
+      float height;
+
+      do
+      {
+        charWidth = Game1.Characters.FirstOrDefault().Value.Width * _scale; // The width should be the same for everything
+        charHeight = Game1.Characters.FirstOrDefault().Value.Height * _scale;
+        var spaceBetween = (4f * _scale);
+        incrementAmount = charWidth + spaceBetween;
+
+        width = (charWidth * newText.Length) + (spaceBetween * (newText.Length - 1));
+        height = charHeight;
+
+        _scale -= 0.01f;
+
+      } while (width > Box.Width || height > Box.Height);
+
       var x = 0f;
       var y = 0f;
 
@@ -100,7 +113,7 @@ namespace Tetris.Controls
           break;
       }
 
-      position = new Vector2(x, y);
+      var position = new Vector2(x, y);
 
       foreach (var character in _text)
       {

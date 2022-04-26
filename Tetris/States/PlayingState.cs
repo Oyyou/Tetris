@@ -24,8 +24,6 @@ namespace Tetris.States
 
     private Game1 _game;
 
-    private ContentManager _content;
-
     private Map _map;
 
     private Tetromino _current;
@@ -95,7 +93,6 @@ namespace Tetris.States
       var mapWidth = 10 * _tileSize;
       var mapHeight = 22 * _tileSize;
 
-      _content = content;
       _map = new Map(10, 22)
       {
         Position = new Vector2(mapX, mapY),
@@ -103,7 +100,7 @@ namespace Tetris.States
 
       _score = new Score(_game);
 
-      _tetrominoManager = new TetrominoManager(_content, _map);
+      _tetrominoManager = new TetrominoManager(content, _map);
 
       var levelTextBoxTexture = content.Load<Texture2D>("TextBoxes/Level");
       var scoreTextBoxTexture = content.Load<Texture2D>("TextBoxes/Score");
@@ -126,7 +123,7 @@ namespace Tetris.States
         piece.PositionOffset = new Vector2(-(_tileSize * 8), y);
         _statPieces.Add(piece);
 
-        _statLabels.Add(stat.Key, new Label("0", new Rectangle((int)piece.Position.X + (_tileSize * 5), (int)piece.Position.Y + (_tileSize / 2), 48, 20), 1f, Label.HorizonalAlignments.Left));
+        _statLabels.Add(stat.Key, new Label("0", new Rectangle((int)piece.Position.X + (_tileSize * 5), (int)piece.Position.Y + (_tileSize / 2), 48, 20), Label.HorizonalAlignments.Left));
 
         y += 72;
       }

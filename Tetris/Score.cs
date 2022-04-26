@@ -17,15 +17,13 @@ namespace Tetris
 
     public int Value { get; private set; }
 
-    public Vector2 Position { get; private set; }
-
     public Score(Game1 game)
     {
-      _topTextLabel = new Label("Top", new Rectangle(800, 40, 92, 20), 0.85f, Label.HorizonalAlignments.Left);
-      _topValueLabel = new Label(game.HighScoreManager.GetTopScore().ToString().PadLeft(6, '0'), new Rectangle(800, 60, 92, 20), 0.85f, Label.HorizonalAlignments.Right);
+      _topTextLabel = new Label("Top", new Rectangle(800, 40, 92, 20), Label.HorizonalAlignments.Left);
+      _topValueLabel = new Label(game.HighScoreManager.GetTopScore().ToString().PadLeft(6, '0'), new Rectangle(800, 60, 92, 20), Label.HorizonalAlignments.Right);
 
-      _scoreTextLabel = new Label("Score", new Rectangle(800, 90, 92, 20), 0.85f, Label.HorizonalAlignments.Left);
-      _scoreValueLabel = new Label("000000", new Rectangle(800, 110, 92, 20), 0.85f, Label.HorizonalAlignments.Right);
+      _scoreTextLabel = new Label("Score", new Rectangle(800, 90, 92, 20), Label.HorizonalAlignments.Left);
+      _scoreValueLabel = new Label("000000", new Rectangle(800, 110, 92, 20), Label.HorizonalAlignments.Right);
     }
 
     public void Increment(int level, int linesCleared)

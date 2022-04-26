@@ -21,23 +21,22 @@ namespace Tetris.Controls
       }
     }
 
-    public TextBox(Texture2D texture, Vector2 position, string text, float scale = 1f, Label.HorizonalAlignments hAlignment = Label.HorizonalAlignments.Center, Label.VerticalAlignments vAlignment = Label.VerticalAlignments.Middle)
+    public TextBox(Texture2D texture, Vector2 position, string text, Label.HorizonalAlignments hAlignment = Label.HorizonalAlignments.Center, Label.VerticalAlignments vAlignment = Label.VerticalAlignments.Middle)
     {
       var padding = 14;
 
       _texture = texture;
       _position = position;
       _label = new Label(text, 
-        new Rectangle(Rectangle.X + padding, Rectangle.Y + padding, Rectangle.Width - (padding * 2), Rectangle.Height - (padding * 2)), 
-        scale,
+        new Rectangle(Rectangle.X + padding, Rectangle.Y + padding, Rectangle.Width - (padding * 2), Rectangle.Height - (padding * 2)),
         hAlignment,
         vAlignment
       );
     }
 
-    public void SetText(string newText, float? scale = null, Label.HorizonalAlignments? newAlignment = null, Label.VerticalAlignments? newVAlignment = null)
+    public void SetText(string newText, Label.HorizonalAlignments? newAlignment = null, Label.VerticalAlignments? newVAlignment = null)
     {
-      _label.SetText(newText, scale, newAlignment, newVAlignment);
+      _label.SetText(newText, newAlignment, newVAlignment);
     }
 
     public void Draw(SpriteBatch spriteBatch)
