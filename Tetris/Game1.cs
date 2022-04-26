@@ -18,15 +18,11 @@ namespace Tetris
 {
   public class Game1 : Game
   {
-    public enum States
-    {
-      Menu,
-      Playing,
-      GameOver,
-    }
-
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+
+
+    private Sprite _background;
 
     private State _state
     {
@@ -36,9 +32,20 @@ namespace Tetris
       }
     }
 
+    /// <summary>
+    /// When popping, this is the state we're popping to
+    /// </summary>
     private Type _prevStateType = null;
 
+    /// <summary>
+    /// The next state we're changing to (on next frame)
+    /// </summary>
     private State _nextState = null;
+
+    /// <summary>
+    /// Go back a state
+    /// </summary>
+    private bool _pop = false;
 
     private Stack<State> _states = new Stack<State>();
 
@@ -158,6 +165,7 @@ namespace Tetris
 
       _rotateSound = Content.Load<SoundEffect>($"Sounds/Rotate");
       _lineClearSound = Content.Load<SoundEffect>("Sounds/LineClear");
+      _background = new Sprite(Content.Load<Texture2D>("Background2"), new Vector2(0, 0));
 
       SetState(new MenuState(this));
     }
@@ -177,8 +185,6 @@ namespace Tetris
     {
       _nextState = newState;
     }
-
-    private bool _pop = false;
 
     public void GoBackState()
     {
@@ -238,6 +244,10 @@ namespace Tetris
     protected override void Draw(GameTime gameTime)
     {
       GraphicsDevice.Clear(Color.Black);
+
+      _spriteBatch.Begin();
+      _background.Draw(_spriteBatch);
+      _spriteBatch.End();
 
       _state.Draw(_spriteBatch);
 

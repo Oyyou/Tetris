@@ -28,8 +28,6 @@ namespace Tetris.States
 
     private Map _map;
 
-    private Sprite _background;
-
     private Tetromino _current;
     private Tetromino _next;
 
@@ -106,8 +104,6 @@ namespace Tetris.States
       _score = new Score(_game);
 
       _tetrominoManager = new TetrominoManager(_content, _map);
-
-      _background = new Sprite(content.Load<Texture2D>("Background2"), new Vector2(0, 0));
 
       var levelTextBoxTexture = content.Load<Texture2D>("TextBoxes/Level");
       var scoreTextBoxTexture = content.Load<Texture2D>("TextBoxes/Score");
@@ -319,8 +315,6 @@ namespace Tetris.States
 
       foreach (var piece in _placedPieces)
         piece.Draw(spriteBatch);
-
-      _background.Draw(spriteBatch);
 
       foreach (var textbox in _textBoxes)
         textbox.Value.Draw(spriteBatch);

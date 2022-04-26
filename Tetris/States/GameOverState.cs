@@ -19,8 +19,6 @@ namespace Tetris.States
 
     private ContentManager _content;
 
-    private Sprite _background;
-
     private Button _continueButton;
 
     private Label _nameLabel;
@@ -40,8 +38,6 @@ namespace Tetris.States
     public override void LoadContent(ContentManager content)
     {
       _content = content;
-
-      _background = new Sprite(content.Load<Texture2D>("Background2"), new Vector2(0, 0));
 
       var buttonTexture = content.Load<Texture2D>("Button");
 
@@ -114,8 +110,6 @@ namespace Tetris.States
     public override void Draw(SpriteBatch spriteBatch)
     {
       spriteBatch.Begin();
-
-      _background.Draw(spriteBatch);
 
       _continueButton.Draw(spriteBatch);
 

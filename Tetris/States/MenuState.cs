@@ -13,8 +13,6 @@ namespace Tetris.States
   {
     private Game1 _game;
 
-    private Sprite _background;
-
     private List<Button> _buttons = new List<Button>();
 
     public MenuState(Game1 game)
@@ -24,8 +22,6 @@ namespace Tetris.States
 
     public override void LoadContent(ContentManager content)
     {
-      _background = new Sprite(content.Load<Texture2D>("Background2"), new Vector2(0, 0));
-
       var buttonTexture = content.Load<Texture2D>("Button");
       var buttonStart = new Vector2(Game1.CentreX - (buttonTexture.Width / 2), 300);
 
@@ -44,8 +40,6 @@ namespace Tetris.States
     public override void Draw(SpriteBatch spriteBatch)
     {
       spriteBatch.Begin();
-
-      _background.Draw(spriteBatch);
 
       foreach (var button in _buttons)
         button.Draw(spriteBatch);

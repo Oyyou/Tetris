@@ -14,8 +14,6 @@ namespace Tetris.States
   {
     private Game1 _game;
 
-    private Sprite _background;
-
     private Label _titleLabel;
 
     private List<Label> _labels = new List<Label>();
@@ -30,8 +28,6 @@ namespace Tetris.States
     public override void LoadContent(ContentManager content)
     {
       var width = 236;
-
-      _background = new Sprite(content.Load<Texture2D>("Background2"), new Vector2(0, 0));
 
       _titleLabel = new Label("High Scores", new Rectangle(Game1.CentreX - (width / 2), 180, width, 30));
 
@@ -55,8 +51,6 @@ namespace Tetris.States
     {
 
       spriteBatch.Begin();
-
-      _background.Draw(spriteBatch);
 
       _backButton.Draw(spriteBatch);
 
