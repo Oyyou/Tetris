@@ -207,7 +207,7 @@ namespace Tetris.States
         bool isLineFull = true;
         for (int x = 0; x < _map.Width; x++)
         {
-          if (_map.GetPoint(x, y) == 0)
+          if (!_map.GetPoint(x, y))
             isLineFull = false;
         }
 
