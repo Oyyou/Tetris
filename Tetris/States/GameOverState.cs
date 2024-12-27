@@ -97,7 +97,7 @@ namespace Tetris.States
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-      spriteBatch.Begin();
+      spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
       _continueButton.Draw(spriteBatch);
 

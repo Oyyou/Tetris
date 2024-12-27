@@ -269,7 +269,7 @@ namespace Tetris.States
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-      spriteBatch.Begin();
+      spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
       _current.Draw(spriteBatch);
 

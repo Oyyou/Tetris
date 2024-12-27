@@ -36,7 +36,7 @@ namespace Tetris.States
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-      spriteBatch.Begin();
+      spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
       foreach (var button in _buttons)
         button.Draw(spriteBatch);
