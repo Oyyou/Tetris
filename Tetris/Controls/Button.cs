@@ -6,10 +6,10 @@ namespace Tetris.Controls
 {
   public class Button
   {
-    private Texture2D _texture;
-    private Vector2 _position;
+    private readonly Texture2D _texture;
+    private readonly Vector2 _position;
 
-    private Label _label;
+    private readonly Label _label;
 
     public Rectangle Rectangle
     {
@@ -29,7 +29,6 @@ namespace Tetris.Controls
       _position = position;
 
       var padding = 10;
-
       _label = new Label(text, new Rectangle((int)_position.X + padding, (int)_position.Y + padding, _texture.Width - (padding * 2), _texture.Height - (padding * 2)));
     }
 

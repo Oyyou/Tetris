@@ -14,6 +14,7 @@ namespace Tetris.Sprites
     private Map _map;
     private int[,] _shape;
     private Rectangle _mapRectangle;
+    private float _timer = 0f;
 
     public List<Block> Blocks { get; private set; } = new List<Block>();
 
@@ -21,7 +22,7 @@ namespace Tetris.Sprites
     {
       get
       {
-        return _map.Position + new Vector2(MapPoint.X * _texture.Width, MapPoint.Y * _texture.Height) + PositionOffset;
+        return _map._position + new Vector2(MapPoint.X * _texture.Width, MapPoint.Y * _texture.Height) + PositionOffset;
       }
     }
 
@@ -40,7 +41,9 @@ namespace Tetris.Sprites
 
     public Color Colour { get; set; } = Color.White;
 
-    public bool IsDone { get; set; } = false;
+    public float Opacity { get; private set; } = 1f;
+
+    public bool HasLanded { get; set; } = false;
 
     public Point MapPoint { get; set; }
 
@@ -149,18 +152,6 @@ namespace Tetris.Sprites
       }
     }
 
-    private float _timer = 0f;
-    public float Opacity { get; private set; } = 1f;
-    public void Flash(GameTime gameTime)
-    {
-      _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-      if (_timer > 0.1f)
-      {
-        _timer = 0f;
-        Opacity = Opacity == 0f ? 1f : 0f;
-      }
-    }
-
     public void MoveY()
     {
       var oldPoint = MapPoint;
@@ -175,8 +166,18 @@ namespace Tetris.Sprites
 
       if (!isValid)
       {
-        IsDone = true;
+        HasLanded = true;
         MapPoint = oldPoint;
+      }
+    }
+
+    public void Flash(GameTime gameTime)
+    {
+      _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+      if (_timer > 0.1f)
+      {
+        _timer = 0f;
+        Opacity = Opacity == 0f ? 1f : 0f;
       }
     }
 
@@ -186,10 +187,11 @@ namespace Tetris.Sprites
       {
         if (block.MapPoint.Y <= y)
         {
-          block._point.Y += 1;
+          var point = new Point(0, 1);
+          block.Point += point;
 
           if (!_map.CanMove(block))
-            block._point.Y -= 1;
+            block.Point -= point;
         }
       }
     }
@@ -209,7 +211,6 @@ namespace Tetris.Sprites
 
     public void Draw(SpriteBatch spriteBatch)
     {
-
       foreach (var sprite in Blocks)
         sprite.Draw(spriteBatch);
     }

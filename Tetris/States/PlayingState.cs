@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Tetris.Controls;
 using Tetris.Manager;
 using Tetris.Sprites;
@@ -22,64 +21,28 @@ namespace Tetris.States
 
     private const int _tileSize = 24;
 
-    private Game1 _game;
+    private readonly Game1 _game;
+    private readonly Dictionary<string, Label> _statLabels = [];
+    private readonly List<Tetromino> _statPieces = [];
+    private readonly List<Tetromino> _placedPieces = [];
 
     private Map _map;
-
     private Tetromino _current;
     private Tetromino _next;
-
     private TetrominoManager _tetrominoManager;
-
-    private List<Tetromino> _placedPieces = new List<Tetromino>();
-
     private Dictionary<string, TextBox> _textBoxes;
-
-    private Dictionary<string, Label> _statLabels = new Dictionary<string, Label>();
-
-    private List<Tetromino> _statPieces = new List<Tetromino>();
-
     private Score _score;
 
     private int _linesCleared;
-
-    private int _level
-    {
-      get
-      {
-        return (int)Math.Floor(_linesCleared / 10d) + 1;
-      }
-    }
-
     private float _timer = 0f;
     private float _moveTimer = 0.3f;
     private bool _hardFall = false;
-
     private bool _lost = false;
 
-    private float _normalDropSpeed
-    {
-      get
-      {
-        return 0.3f - (_level / 100f);
-      }
-    }
-
-    private float _softDropSpeed
-    {
-      get
-      {
-        return _normalDropSpeed / 2f;
-      }
-    }
-
-    private float _hardDropSpeed
-    {
-      get
-      {
-        return _softDropSpeed / 4f;
-      }
-    }
+    private int Level => (int)Math.Floor(_linesCleared / 10d) + 1;
+    private float NormalDropSpeed => 0.3f - (Level / 100f);
+    private float SoftDropSpeed => NormalDropSpeed / 2f;
+    private float HardDropSpeed => SoftDropSpeed / 4f;
 
     public PlayingState(Game1 game)
     {
@@ -94,7 +57,7 @@ namespace Tetris.States
 
       _map = new Map(10, 22)
       {
-        Position = new Vector2(mapX, mapY),
+        _position = new Vector2(mapX, mapY),
       };
 
       _score = new Score(_game);
@@ -136,6 +99,7 @@ namespace Tetris.States
     private void SetNext()
     {
       _next = _tetrominoManager.GetRandomBlock();
+
       var panelWidth = 96;
       var x = (panelWidth / 2) - (_next.Rectangle.Width / 2);
       _next.PositionOffset = new Vector2(276 + x, 156);
@@ -158,7 +122,7 @@ namespace Tetris.States
         return;
       }
 
-      if (_current.IsDone)
+      if (_current.HasLanded)
       {
         _current = _next;
         _current.PositionOffset = new Vector2(0, 0);
@@ -167,7 +131,7 @@ namespace Tetris.States
         SetNext();
 
         _hardFall = false;
-        _moveTimer = _normalDropSpeed;
+        _moveTimer = NormalDropSpeed;
       }
 
       Input();
@@ -191,7 +155,7 @@ namespace Tetris.States
 
     private void UpdateMap()
     {
-      if (!_current.IsDone)
+      if (!_current.HasLanded)
         return;
 
       _placedPieces.Add(_current);
@@ -250,7 +214,7 @@ namespace Tetris.States
         _game.PlayLineClearedSoundEffect();
       }
       _textBoxes["Level"].SetText("Lines-" + _linesCleared);
-      _score.Increment(_level, linesCleared);
+      _score.Increment(Level, linesCleared);
       foreach (var label in _statLabels)
         label.Value.SetText(_tetrominoManager.Stats[label.Key].Appearances.ToString());
       _map.WriteMap();
@@ -266,7 +230,7 @@ namespace Tetris.States
       if (Game1.GameKeyboard.IsKeyPressed(Keys.Space))
       {
         _hardFall = true;
-        _moveTimer = _hardDropSpeed;
+        _moveTimer = HardDropSpeed;
       }
 
       // Don't allow anymore input if hard falling
@@ -286,11 +250,11 @@ namespace Tetris.States
 
       if (Game1.GameKeyboard.IsKeyDown(Keys.S))
       {
-        _moveTimer = _softDropSpeed;
+        _moveTimer = SoftDropSpeed;
       }
       else
       {
-        _moveTimer = _normalDropSpeed;
+        _moveTimer = NormalDropSpeed;
       }
 
       if (Game1.GameKeyboard.IsKeyPressed(Keys.D))

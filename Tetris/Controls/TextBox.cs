@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Tetris.Controls
 {
@@ -27,7 +24,7 @@ namespace Tetris.Controls
 
       _texture = texture;
       _position = position;
-      _label = new Label(text, 
+      _label = new Label(text,
         new Rectangle(Rectangle.X + padding, Rectangle.Y + padding, Rectangle.Width - (padding * 2), Rectangle.Height - (padding * 2)),
         hAlignment,
         vAlignment

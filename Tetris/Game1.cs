@@ -1,14 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using Tetris.Controls;
 using Tetris.Manager;
 using Tetris.Models;
 using Tetris.Sprites;
@@ -20,7 +18,6 @@ namespace Tetris
   {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
 
     private Sprite _background;
 
@@ -47,14 +44,12 @@ namespace Tetris
     /// </summary>
     private bool _pop = false;
 
-    private Stack<State> _states = new Stack<State>();
+    private Stack<State> _states = new();
 
     private Song _backgroundMusic;
 
     private SoundEffect _rotateSound;
     private SoundEffect _lineClearSound;
-
-    private SettingsManager _settingsManager;
 
     public static Random Random;
 
@@ -110,7 +105,6 @@ namespace Tetris
       GameKeyboard = new GameKeyboard();
 
       Settings = LoadSettings();
-      _settingsManager = new SettingsManager();
 
       _graphics.PreferredBackBufferWidth = ScreenWidth;
       _graphics.PreferredBackBufferHeight = ScreenHeight;

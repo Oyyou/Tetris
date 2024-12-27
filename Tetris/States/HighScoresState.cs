@@ -1,24 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Tetris.Controls;
-using Tetris.Sprites;
 
 namespace Tetris.States
 {
   public class HighScoresState : State
   {
-    private Game1 _game;
+    private readonly Game1 _game;
 
     private Label _titleLabel;
-
-    private List<Label> _labels = new List<Label>();
-
     private Button _backButton;
+    private List<Label> _labels = [];
 
     public HighScoresState(Game1 game)
     {
@@ -53,7 +48,6 @@ namespace Tetris.States
       spriteBatch.Begin();
 
       _backButton.Draw(spriteBatch);
-
       _titleLabel.Draw(spriteBatch);
 
       foreach (var label in _labels)

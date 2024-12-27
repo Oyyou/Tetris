@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using Tetris.Sprites;
 
 namespace Tetris.Controls
@@ -32,7 +28,7 @@ namespace Tetris.Controls
     private HorizonalAlignments _hAlignment;
     private VerticalAlignments _vAlignment;
 
-    private List<Sprite> _sprites = new List<Sprite>();
+    private List<Sprite> _sprites = [];
 
     public Label(string text, Rectangle box, HorizonalAlignments alignment = HorizonalAlignments.Center, VerticalAlignments vAlignment = VerticalAlignments.Middle)
     {
@@ -125,9 +121,9 @@ namespace Tetris.Controls
           continue;
         }
 
-        if (Game1.Characters.ContainsKey(key))
+        if (Game1.Characters.TryGetValue(key, out Texture2D value))
         {
-          var texture = Game1.Characters[key];
+          var texture = value;
           _sprites.Add(new Sprite(texture, position) { Scale = _scale });
 
           position.X += incrementAmount;
@@ -135,7 +131,7 @@ namespace Tetris.Controls
       }
     }
 
-    private string GetChar(string value)
+    private static string GetChar(string value)
     {
       var result = value.ToUpper();
 

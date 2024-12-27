@@ -10,25 +10,12 @@ namespace Tetris
 
   public class Map
   {
-    private bool[,] _data;
+    private readonly bool[,] _data;
+    private Vector2 _position;
 
-    public Vector2 Position;
+    public int Width => _data.GetLength(1);
 
-    public int Width
-    {
-      get
-      {
-        return _data.GetLength(1);
-      }
-    }
-
-    public int Height
-    {
-      get
-      {
-        return _data.GetLength(0);
-      }
-    }
+    public int Height => _data.GetLength(0);
 
     public Map(int width, int height)
     {
@@ -49,14 +36,6 @@ namespace Tetris
     }
 
     public bool GetPoint(int x, int y) => _data[y, x];
-
-    public void ClearRow(int y)
-    {
-      for (int x = 0; x < Width; x++)
-      {
-        _data[y, x] = false;
-      }
-    }
 
     public void WriteMap()
     {
@@ -82,7 +61,17 @@ namespace Tetris
       return true;
     }
 
-    public bool IsOnMap(IMappable obj)
+    public void AddObject(IMappable obj)
+    {
+      _data[obj.MapPoint.Y, obj.MapPoint.X] = true;
+    }
+
+    private bool ObjectCollides(IMappable obj)
+    {
+      return _data[obj.MapPoint.Y, obj.MapPoint.X];
+    }
+
+    private bool IsOnMap(IMappable obj)
     {
       if (obj.MapPoint.X < 0)
         return false;
@@ -97,21 +86,6 @@ namespace Tetris
         return false;
 
       return true;
-    }
-
-    public bool ObjectCollides(IMappable obj)
-    {
-      return _data[obj.MapPoint.Y, obj.MapPoint.X];
-    }
-
-    public void AddObject(IMappable obj)
-    {
-      _data[obj.MapPoint.Y, obj.MapPoint.X] = true;
-    }
-
-    public void RemoveObject(IMappable obj)
-    {
-      _data[obj.MapPoint.Y, obj.MapPoint.X] = false;
     }
   }
 }

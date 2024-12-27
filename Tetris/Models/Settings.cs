@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Tetris.Models
+﻿namespace Tetris.Models
 {
   public class Settings
   {

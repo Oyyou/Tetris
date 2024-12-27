@@ -1,22 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Tetris.Controls;
 using Tetris.Models;
-using Tetris.Sprites;
 
 namespace Tetris.States
 {
   public class SettingsState : State
   {
-    private Game1 _game;
+    private readonly Game1 _game;
+    private readonly Settings _settings;
 
-    private Dictionary<string, Button> _buttons = new Dictionary<string, Button>();
+    private Dictionary<string, Button> _buttons = [];
 
-    private Settings _settings;
 
     public SettingsState(Game1 game)
     {

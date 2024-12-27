@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 using Tetris.Models;
 
@@ -13,7 +11,7 @@ namespace Tetris.Manager
     private const string _highScoresFile = "highscores.xml";
     private readonly XmlSerializer _serializer;
 
-    public List<HighScore> HighScores { get; private set; } = new List<HighScore>();
+    public List<HighScore> HighScores { get; private set; } = [];
 
     public HighScoreManager()
     {

@@ -2,29 +2,21 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Tetris.Controls;
 using Tetris.Models;
-using Tetris.Sprites;
 
 namespace Tetris.States
 {
   public class GameOverState : State
   {
-    private Game1 _game;
-
-    private HighScore _score;
+    private readonly Game1 _game;
+    private readonly HighScore _score;
 
     private Button _continueButton;
-
     private Label _nameLabel;
-
-    private List<Label> _labels = new List<Label>();
-
-    private string _name { get; set; } = "";
-
+    private List<Label> _labels = [];
+    private string _name = "";
     private Keys? _pressedKey = null;
 
     public GameOverState(Game1 game, HighScore score)
@@ -48,13 +40,13 @@ namespace Tetris.States
 
       _nameLabel = new Label("---", new Rectangle(x, 350, width, 30));
 
-      _labels = new List<Label>()
-      {
+      _labels =
+      [
         new Label("Score:" + _score.Value, new Rectangle(x, 180, width, 30)),
         new Label("Please enter", new Rectangle(x, 300, width, 30)),
         new Label("your name:", new Rectangle(x, 320, width, 30)),
         _nameLabel
-      };
+      ];
     }
 
     private void Continue()

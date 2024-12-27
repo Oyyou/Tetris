@@ -1,11 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Tetris.Controls;
-using Tetris.Sprites;
 
 namespace Tetris.States
 {
@@ -13,7 +10,7 @@ namespace Tetris.States
   {
     private Game1 _game;
 
-    private List<Button> _buttons = new List<Button>();
+    private List<Button> _buttons = [];
 
     public MenuState(Game1 game)
     {
