@@ -159,7 +159,7 @@ namespace Tetris
 
       _rotateSound = Content.Load<SoundEffect>($"Sounds/Rotate");
       _lineClearSound = Content.Load<SoundEffect>("Sounds/LineClear");
-      _background = new Sprite(Content.Load<Texture2D>("Background2"), new Vector2(0, 0));
+      _background = new Sprite(Content.Load<Texture2D>("Background"), new Vector2(0, 0));
 
       SetState(new MenuState(this));
     }

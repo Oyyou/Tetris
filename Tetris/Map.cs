@@ -11,7 +11,7 @@ namespace Tetris
   public class Map
   {
     private readonly bool[,] _data;
-    private Vector2 _position;
+    public Vector2 Position { get; init; }
 
     public int Width => _data.GetLength(1);
 

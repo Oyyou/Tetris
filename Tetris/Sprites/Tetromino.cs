@@ -22,7 +22,7 @@ namespace Tetris.Sprites
     {
       get
       {
-        return _map._position + new Vector2(MapPoint.X * _texture.Width, MapPoint.Y * _texture.Height) + PositionOffset;
+        return _map.Position + new Vector2(MapPoint.X * _texture.Width, MapPoint.Y * _texture.Height) + PositionOffset;
       }
     }
 

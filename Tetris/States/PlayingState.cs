@@ -57,7 +57,7 @@ namespace Tetris.States
 
       _map = new Map(10, 22)
       {
-        _position = new Vector2(mapX, mapY),
+        Position = new Vector2(mapX, mapY),
       };
 
       _score = new Score(_game);
