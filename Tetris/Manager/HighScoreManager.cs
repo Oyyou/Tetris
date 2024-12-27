@@ -47,7 +47,7 @@ namespace Tetris.Manager
 
     public int GetTopScore()
     {
-      return GetTopHighScores(1).FirstOrDefault().Value;
+      return GetTopHighScores(1).FirstOrDefault()?.Value ?? 0;
     }
 
     public IEnumerable<HighScore> GetTopHighScores(int amount = 10)

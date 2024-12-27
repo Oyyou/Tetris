@@ -91,7 +91,6 @@ namespace Tetris.States
       var mapX = Game1.CentreX - 120;
       var mapY = _tileSize * 6;
       var mapWidth = 10 * _tileSize;
-      var mapHeight = 22 * _tileSize;
 
       _map = new Map(10, 22)
       {

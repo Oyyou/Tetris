@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Tetris.Controls;
 
 namespace Tetris
@@ -20,7 +18,7 @@ namespace Tetris
     public Score(Game1 game)
     {
       _topTextLabel = new Label("Top", new Rectangle(800, 40, 92, 20), Label.HorizonalAlignments.Left);
-      _topValueLabel = new Label(game.HighScoreManager.GetTopScore().ToString().PadLeft(6, '0'), new Rectangle(800, 60, 92, 20), Label.HorizonalAlignments.Right);
+      _topValueLabel = new Label($"{game.HighScoreManager.GetTopScore():000000}", new Rectangle(800, 60, 92, 20), Label.HorizonalAlignments.Right);
 
       _scoreTextLabel = new Label("Score", new Rectangle(800, 90, 92, 20), Label.HorizonalAlignments.Left);
       _scoreValueLabel = new Label("000000", new Rectangle(800, 110, 92, 20), Label.HorizonalAlignments.Right);
