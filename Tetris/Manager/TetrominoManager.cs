@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Tetris.Sprites;
 
 namespace Tetris.Manager
@@ -28,13 +26,13 @@ namespace Tetris.Manager
       }
     }
 
-    private ContentManager _content;
+    private readonly ContentManager _content;
 
-    private Map _map;
+    private readonly Map _map;
 
-    private string _lastPiece = "";
+    private readonly List<string> _bucket = [];
 
-    public Dictionary<string, TetrominoObject> Stats { get; private set; } = new Dictionary<string, TetrominoObject>();
+    public Dictionary<string, TetrominoObject> Stats { get; private set; } = [];
 
     public TetrominoManager(ContentManager content, Map map)
     {
@@ -51,41 +49,33 @@ namespace Tetris.Manager
         { "RhodeIslandZ", new TetrominoObject(GetRhodeIslandZ) },
         { "Smashboy", new TetrominoObject(GetSmashboy) }
       };
+
+      SetBucket();
+    }
+
+    private void SetBucket()
+    {
+      foreach (var stat in Stats)
+      {
+        _bucket.Add(stat.Key);
+        _bucket.Add(stat.Key);
+      }
     }
 
     public Tetromino GetRandomBlock()
     {
-      string result = null;
+      var random = Game1.Random.Next(0, _bucket.Count);
+      var piece = _bucket[random];
 
-    Start:
-      var total = Stats.Sum(c => c.Value.Appearances + 10);
+      _bucket.RemoveAt(random);
 
-      var random = Game1.Random.Next(0, total);
-
-      var chance = 0;
-      foreach (var piece in Stats)
+      if (_bucket.Count == 0)
       {
-        var amount = piece.Value.Appearances + 10;
-        chance += amount;
-        if (random < chance)
-        {
-
-          result = piece.Key;
-          break;
-        }
+        SetBucket();
       }
 
-      // Re-roll once if we get the same piece twice in a row
-      if (_lastPiece == result)
-      {
-        _lastPiece = "";
-        goto Start;
-      }
-
-      Stats[result].Appearances++;
-
-      _lastPiece = result;
-      return Stats[result].GetPiece();
+      Stats[piece].Appearances++;
+      return Stats[piece].GetPiece();
     }
 
     #region Tetrominoes
